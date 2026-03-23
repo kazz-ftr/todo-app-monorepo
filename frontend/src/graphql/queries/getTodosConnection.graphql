@@ -1,0 +1,25 @@
+query GetTodosConnection($first: Int, $after: String) {
+	todosConnection(first: $first, after: $after) {
+		edges {
+			node {
+				id
+				title
+				completed
+				category {
+					id
+					name
+				}
+				tags {
+					id
+					name
+				}
+			}
+			cursor
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+		totalCount
+	}
+}

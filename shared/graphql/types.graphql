@@ -1,0 +1,40 @@
+type Tag {
+	id: ID!
+	name: String!
+	createdAt: String!
+	todos: [Todo!]!
+}
+
+type Category {
+	id: ID!
+	name: String!
+	createdAt: String!
+	todos: [Todo!]!
+}
+
+type Todo {
+	id: ID!
+	title: String!
+	completed: Boolean!
+	createdAt: String!
+	category: Category
+	tags: [Tag!]!
+}
+
+type TodoConnection {
+	edges: [TodoEdge!]!
+	pageInfo: PageInfo!
+	totalCount: Int!
+}
+
+type TodoEdge {
+	node: Todo!
+	cursor: String!
+}
+
+type PageInfo {
+	hasNextPage: Boolean!
+	hasPreviousPage: Boolean!
+	startCursor: String
+	endCursor: String
+}

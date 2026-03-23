@@ -1,0 +1,9 @@
+mutation AddTagToTodo($todoId: ID!, $tagId: ID!) {
+  addTagToTodo(todoId: $todoId, tagId: $tagId) {
+    id
+    tags {
+      id
+      name
+    }
+  }
+}

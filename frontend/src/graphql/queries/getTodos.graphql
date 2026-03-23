@@ -1,0 +1,15 @@
+query GetTodos {
+	todos {
+		id
+		title
+		completed
+		category {
+			id
+			name
+		}
+		tags {
+			id
+			name
+		}
+	}
+}

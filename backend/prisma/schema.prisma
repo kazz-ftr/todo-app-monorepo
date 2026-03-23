@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  todos     Todo[]   // 1対多の「多」側を参照
+
+  @@map("categories")
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  todos     Todo[]   // 多対多
+
+  @@map("tags")
+}
+
+model Todo {
+  id         Int       @id @default(autoincrement())
+  title      String
+  completed  Boolean   @default(false)
+  createdAt  DateTime  @default(now()) @map("created_at")
+  deletedAt  DateTime? @map("deleted_at")  // 論理削除用
+  categoryId Int?      @map("category_id")
+  category   Category? @relation(fields: [categoryId], references: [id])
+  tags       Tag[]     // 多対多
+
+  @@index([categoryId])   // category_idにインデックス
+  @@index([deletedAt])    // deleted_atにインデックス（論理削除の検索用）
+  @@index([createdAt])    // created_atにインデックス（ソート用）
+  @@map("todos")
+}

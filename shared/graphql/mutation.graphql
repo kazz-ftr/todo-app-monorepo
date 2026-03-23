@@ -1,0 +1,25 @@
+type Mutation {
+	createTodo(input: CreateTodoInput!): Todo!
+	updateTodo(id: ID!, input: UpdateTodoInput!): Todo!
+	deleteTodo(id: ID!): Todo!
+	restoreTodo(id: ID!): Todo!
+	createCategory(name: String!): Category!
+	deleteCategory(id: ID!): Category!
+	createTag(name: String!): Tag!
+	deleteTag(id: ID!): Tag!
+	addTagToTodo(todoId: ID!, tagId: ID!): Todo!
+	removeTagFromTodo(todoId: ID!, tagId: ID!): Todo!
+}
+
+input CreateTodoInput {
+	title: String!
+	categoryId: ID
+	tagIds: [ID!]
+}
+
+input UpdateTodoInput {
+	title: String
+	completed: Boolean
+	categoryId: ID
+	tagIds: [ID!]
+}

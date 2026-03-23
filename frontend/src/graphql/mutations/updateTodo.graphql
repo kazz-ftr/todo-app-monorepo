@@ -1,0 +1,15 @@
+mutation UpdateTodo($id: ID!, $input: UpdateTodoInput!) {
+  updateTodo(id: $id, input: $input) {
+    id
+    title
+    completed
+    category {
+      id
+      name
+    }
+    tags {
+      id
+      name
+    }
+  }
+}
